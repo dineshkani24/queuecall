@@ -2,7 +2,9 @@
 
 Stop execution of second function until first function finished or some tasks complete
 
-Eg: 1. Resize image function only after image download finished        
+Example: 
+
+1. Resize image function only after image download finished        
 2. Call thirdparty library functions only after library loaded in your application.
 
 
@@ -19,7 +21,7 @@ queuecall.createQueue(function(){
   this.callnext(params);
 });
 
-Eg: 
+#Example: 
 
 function getScript(jspath){
   var _parent = this;
