@@ -17,22 +17,23 @@ jQuery v1.9
 
 #usage
 
-queuecall.createQueue(function(){
-  this.callnext(params);
-});
+    queuecall.createQueue(function(){
+      this.callnext(params);
+    });
 
 #Example: 
 
-function getScript(jspath){
-  var _parent = this;
-  $.getScript(jspath, function() {
-    _parent.callnext(true);
-  });
-}
+    function getScript(jspath){
+      var _parent = this;
+      $.getScript(jspath, function() {
+        _parent.callnext(true);
+      });
+      
+    }
 
-queuecall.createQueue(function(){
-  getScript("module.js");
-}, function(isfileloaded){
-  console.log(isfileloaded);
-});
+    queuecall.createQueue(function(){
+      getScript("module.js");
+    }, function(isfileloaded){
+      console.log(isfileloaded);
+    });
 
