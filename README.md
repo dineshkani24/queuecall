@@ -28,10 +28,12 @@ queuecall.min.js - (less than a kb)
 #Example: 
 
     function getScript(jspath){
-      var _parent = this;
-      $.getScript(jspath, function() {
-        _parent.callnext(true);
-      });
+        var _parent = this;
+        $.getScript(jspath).done(function() {
+            _parent.callnext(true);
+        }).fail(function(){ 
+            _parent.callnext(false); 
+        });
     }
 
     queuecall(getScript, function(isfileloaded){
