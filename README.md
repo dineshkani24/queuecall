@@ -1,6 +1,8 @@
 # Queuecall (Synchronous call)
 
-Stop execution of second function until first function finished or some tasks complete
+Stop execution of second function until first function finished or some tasks complete.
+
+Easy to implement and light weight less than one kb
 
 Example: 
 
@@ -15,11 +17,6 @@ Execute second function only after first function finished
 
 jQuery v1.9
 
-#js
-
-queuecall.js - 1kb
-
-queuecall.min.js - (less than a kb)
 
 #usage
 
