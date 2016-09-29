@@ -8,35 +8,26 @@
 var queuecall = (function(){
 	"use strict";
 	
-	var prepareFunction = function(execFunc){
-		if (jQuery.isFunction(execFunc)){
-			execFunc = (function() {
-				var defer = jQuery.Deferred();
-			    var copyFunc = execFunc;
-			    
-			    var returnvalue = {
-			    	interfacefunc: function() {
-				        copyFunc.apply(this, arguments);
-				        return defer.promise();
-				    },
-				    callnext: function(){defer.resolve(arguments);},
-			    }
-			    return returnvalue;
-			}());
-			return execFunc.interfacefunc();
+	var QueueCall = (function(execFunc, endFunc){
+		this.startFunc = function(){
+		    execFunc.apply(this, arguments);
+	        return this.defer.promise();
 		}
+		this.defer = jQuery.Deferred();
+		this.endFunc = endFunc;
+	});
+	
+	QueueCall.prototype.startQueue = function(){
+		var _parent = this;
+		jQuery.when(_parent.startFunc.apply(this, arguments)).done(function(params){
+			_parent.endFunc.apply(undefined, params);
+		});
+	}
+	QueueCall.prototype.callnext = function(){
+		this.defer.resolve(arguments);
 	}
 	
-	var makecall = function(execFunc, afterExec){
-		jQuery.when(prepareFunction(execFunc)).done(function(params){
-			if (jQuery.isFunction(afterExec)){afterExec.apply(this, params);}
-		});
+	return function(startFunc, endFunc){ 
+		return new QueueCall(startFunc, endFunc)
 	};
-	
-	var queuecall = {
-		createQueue: function(execFunc, afterExec){
-			makecall(execFunc, afterExec);
-		}
-	};
-	return queuecall;
 })();
