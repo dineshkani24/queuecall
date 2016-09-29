@@ -23,9 +23,7 @@ queuecall.min.js - (less than a kb)
 
 #usage
 
-    queuecall.createQueue(function(){
-      this.callnext(params);
-    });
+    queuecall(function1, function2).startQueue(params for function1);
 
 #Example: 
 
@@ -34,12 +32,9 @@ queuecall.min.js - (less than a kb)
       $.getScript(jspath, function() {
         _parent.callnext(true);
       });
-      
     }
 
-    queuecall.createQueue(function(){
-      getScript("module.js");
-    }, function(isfileloaded){
-      console.log(isfileloaded);
-    });
+    queuecall(getScript, function(isfileloaded){
+        console.log(isfileloaded);
+    }).startQueue("module.js");
 
