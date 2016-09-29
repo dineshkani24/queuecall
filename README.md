@@ -4,14 +4,6 @@ Stop execution of second function until first function finished or some tasks co
 
 Easy to implement and light weight less than one kb
 
-Example: 
-
-1. Resize image function only after image download finished        
-2. Call thirdparty library functions only after library loaded in your application.
-
-
-Execute second function only after first function finished
-
 
 #dependencies
 
